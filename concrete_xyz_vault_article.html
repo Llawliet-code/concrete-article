@@ -1,0 +1,534 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --concrete-dark: #0f0f0f;
+    --concrete-mid: #1a1a1a;
+    --concrete-border: rgba(255,255,255,0.08);
+    --concrete-accent: #c8f55a;
+    --concrete-muted: rgba(255,255,255,0.45);
+    --concrete-text: rgba(255,255,255,0.88);
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-sans: 'Syne', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  .article-root {
+    background: #0f0f0f;
+    color: var(--concrete-text);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    padding-bottom: 5rem;
+  }
+
+  .hero {
+    padding: 4rem 2rem 3rem;
+    border-bottom: 1px solid var(--concrete-border);
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .tag-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border: 1px solid var(--concrete-border);
+    border-radius: 100px;
+    color: var(--concrete-muted);
+    text-transform: uppercase;
+  }
+
+  .tag.accent {
+    border-color: var(--concrete-accent);
+    color: var(--concrete-accent);
+  }
+
+  h1.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    line-height: 1.08;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  h1.hero-title em {
+    font-style: italic;
+    color: var(--concrete-accent);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--concrete-muted);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--concrete-border);
+    margin: 0;
+  }
+
+  .article-body {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--concrete-border);
+  }
+
+  .section:last-child {
+    border-bottom: none;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--concrete-accent);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.78;
+    color: var(--concrete-text);
+    margin-bottom: 1rem;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  .callout {
+    border: 1px solid var(--concrete-border);
+    border-left: 3px solid var(--concrete-accent);
+    background: rgba(200, 245, 90, 0.04);
+    border-radius: 0 8px 8px 0;
+    padding: 1.25rem 1.5rem;
+    margin: 1.75rem 0;
+    font-style: italic;
+    color: var(--concrete-text);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.75rem 0;
+  }
+
+  .concept-card {
+    background: var(--concrete-mid);
+    border: 1px solid var(--concrete-border);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+
+  .concept-card .card-icon {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--concrete-accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
+  .concept-card .card-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+    color: #fff;
+  }
+
+  .concept-card .card-desc {
+    font-size: 0.875rem;
+    color: var(--concrete-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .analogy-box {
+    background: rgba(200, 245, 90, 0.05);
+    border: 1px solid rgba(200, 245, 90, 0.15);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.75rem 0;
+  }
+
+  .analogy-box .analogy-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--concrete-accent);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .analogy-box p {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 1.75rem 0;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .flow-step {
+    background: var(--concrete-mid);
+    border: 1px solid var(--concrete-border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .flow-step .fs-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--concrete-accent);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .flow-step .fs-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .flow-arrow {
+    color: var(--concrete-muted);
+    font-size: 1rem;
+    padding: 0 6px;
+    flex-shrink: 0;
+  }
+
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+  }
+
+  .summary-table th {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--concrete-muted);
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--concrete-border);
+  }
+
+  .summary-table td {
+    padding: 0.85rem 1rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+  }
+
+  .summary-table td:first-child {
+    font-family: var(--font-mono);
+    color: var(--concrete-accent);
+    white-space: nowrap;
+    width: 120px;
+  }
+
+  .summary-table td:last-child {
+    color: var(--concrete-muted);
+    line-height: 1.6;
+  }
+
+  .cta-section {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: var(--concrete-mid);
+    border: 1px solid var(--concrete-border);
+    border-radius: 14px;
+    text-align: center;
+  }
+
+  .cta-section h3 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-section p {
+    color: var(--concrete-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--concrete-accent);
+    color: #0f0f0f;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 0.75rem 2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s;
+  }
+
+  .cta-btn:hover { opacity: 0.85; }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--concrete-border);
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--concrete-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .dot { color: var(--concrete-border); }
+
+  strong { color: #fff; font-weight: 600; }
+</style>
+
+<div class="article-root">
+  <div class="hero">
+    <div class="tag-row">
+      <span class="tag accent">Community Article</span>
+      <span class="tag">DeFi Vaults</span>
+      <span class="tag">Beginner Friendly</span>
+    </div>
+    <h1 class="hero-title">How Do Concrete Vaults <em>Actually</em> Work?</h1>
+    <p class="hero-sub">You deposited. You got shares. Numbers appeared on screen. But under the hood, a sophisticated system of onchain capital deployment is working for you — and most people have no idea how.</p>
+    <div class="meta-row">
+      <span class="meta-item">Concrete Community</span>
+      <span class="dot">·</span>
+      <span class="meta-item">8 min read</span>
+      <span class="dot">·</span>
+      <span class="meta-item">Managed DeFi · Vault Mechanics</span>
+    </div>
+  </div>
+
+  <div class="article-body">
+
+    <div class="section">
+      <p class="section-label">01 — The user experience</p>
+      <h2>You Deposited. Now What?</h2>
+      <p>You found <strong>Concrete</strong>, connected your wallet, and dropped some assets into a vault. A few seconds later, a number appeared in your dashboard — your vault shares. Then you noticed two other figures: something called <strong>eRate</strong> and something called <strong>NAV</strong>.</p>
+      <p>If your reaction was <em>"...what do those mean?"</em> — you're not alone. These terms sound technical, but the ideas behind them are surprisingly intuitive once you have the right mental model.</p>
+      <div class="callout">"Think of a Concrete vault not as a savings account, but as a seat in a very well-run investment club — one that never sleeps and constantly optimizes."</div>
+      <p>Let's break it all down from the beginning.</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">02 — Vault shares & eRate</p>
+      <h2>Shares, eRate, and How Value Grows</h2>
+      <p>When you deposit into a Concrete vault, you don't simply park money. You <strong>buy into a pool</strong>. In exchange, you receive vault shares — a number that represents your proportional ownership of everything inside that vault.</p>
+
+      <div class="analogy-box">
+        <span class="analogy-label">Analogy — The Pizza Model</span>
+        <p>Imagine a pizza that gets larger over time. When you join, you're given a slice. You don't have more slices as time goes on — but the pizza gets bigger. So your slice becomes worth more. That's how vault shares work. Your share count stays the same. The value of each share grows.</p>
+      </div>
+
+      <p>The <strong>eRate</strong> (exchange rate) is the real-time price of a single vault share, measured in the underlying asset. When the vault earns yield, the eRate goes up. When you eventually exit, your shares are redeemed at whatever the eRate is at that moment.</p>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <span class="card-icon">Vault Shares</span>
+          <div class="card-title">Your Ownership</div>
+          <p class="card-desc">A fixed number representing your proportional claim on the vault's total assets.</p>
+        </div>
+        <div class="concept-card">
+          <span class="card-icon">eRate</span>
+          <div class="card-title">Share Value</div>
+          <p class="card-desc">The current price of one share. Rises as the vault earns yield. This is how your balance grows.</p>
+        </div>
+        <div class="concept-card">
+          <span class="card-icon">Your Balance</span>
+          <div class="card-title">Shares × eRate</div>
+          <p class="card-desc">Multiply your shares by the current eRate and you get the current value of your position.</p>
+        </div>
+      </div>
+
+      <p>So when your dashboard shows a growing number — it's not new shares appearing. It's the same shares becoming more valuable, because the vault's eRate is climbing.</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">03 — NAV Explained</p>
+      <h2>NAV: The Total Picture</h2>
+      <p>NAV stands for <strong>Net Asset Value</strong>. In plain terms: it's the total value of everything inside the vault at any given moment — all the deployed capital, accrued yield, and held assets combined into one number.</p>
+      <p>Think of the vault as a shared jar of money. NAV is how full the jar is. Shares are how many people have a claim on it, and in what proportion. The eRate is simply: <em>jar size ÷ total shares</em>.</p>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <span class="card-icon">NAV grows when...</span>
+          <div class="card-title">Yield is Generated</div>
+          <p class="card-desc">Strategies earn returns, accrued fees settle, and capital compounds over time.</p>
+        </div>
+        <div class="concept-card">
+          <span class="card-icon">NAV affects...</span>
+          <div class="card-title">Your Share Price</div>
+          <p class="card-desc">As NAV increases, the eRate increases. Your same shares are now worth more underlying assets.</p>
+        </div>
+      </div>
+
+      <p>This is why NAV is the heartbeat of a vault. A growing NAV means the vault's strategies are working. When you see your balance increase, it's because the total pool — the NAV — has grown, making each share more valuable.</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">04 — The time factor</p>
+      <h2>Why Time Is the Real Asset</h2>
+      <p>Concrete vaults are not built for quick wins. They're built for compounding — and compounding requires time to do its work.</p>
+      <p>Here's the honest picture: <strong>yield strategies take time to execute</strong>. Capital is deployed across different positions on-chain, and those positions need time to mature and generate returns. Gas costs, execution fees, and rebalancing all factor into the equation — short-term, those friction costs can outweigh gains.</p>
+
+      <div class="analogy-box">
+        <span class="analogy-label">Analogy — The Garden</span>
+        <p>Planting seeds in a garden costs effort upfront. For the first few days, nothing seems to happen. Then shoots appear. Then growth accelerates. Pulling the plant out on day two doesn't let you "cut your losses" — it just means you never got the harvest. DeFi vaults work the same way.</p>
+      </div>
+
+      <p>The longer you stay in a vault, the more you benefit from compounding. Each cycle of yield gets folded back into the pool, increasing NAV, increasing eRate, making your shares worth more — which then earns yield on a larger base. That's the compounding loop working in your favor.</p>
+
+      <div class="flow-row">
+        <div class="flow-step"><span class="fs-num">01</span><span class="fs-label">Yield earned</span></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><span class="fs-num">02</span><span class="fs-label">NAV grows</span></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><span class="fs-num">03</span><span class="fs-label">eRate rises</span></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><span class="fs-num">04</span><span class="fs-label">Shares worth more</span></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><span class="fs-num">05</span><span class="fs-label">Larger base compounds</span></div>
+      </div>
+
+      <p>Withdrawals are also <strong>structured for stability</strong>. This isn't a restriction — it's a feature. When large amounts exit abruptly, it forces strategies to unwind at suboptimal moments, hurting everyone in the pool. The structure protects the integrity of the vault for all participants.</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">05 — Active management</p>
+      <h2>The Vault Doesn't Just Sit There</h2>
+      <p>Here's what separates Concrete from simply holding tokens in your wallet: the vault is <strong>actively working</strong>. Capital isn't deposited and forgotten. It's continuously deployed, monitored, and adjusted.</p>
+
+      <div class="analogy-box">
+        <span class="analogy-label">Analogy — The Chef</span>
+        <p>A great chef doesn't just throw ingredients in a pan and walk away. They taste, adjust seasoning, change heat, swap components based on what's available and what the dish needs. The vault operates the same way — constantly reading market conditions and repositioning capital toward better opportunities.</p>
+      </div>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <span class="card-icon">Deployment</span>
+          <div class="card-title">Capital Goes to Work</div>
+          <p class="card-desc">Assets are deployed across yield-generating strategies on-chain — not sitting idle.</p>
+        </div>
+        <div class="concept-card">
+          <span class="card-icon">Rebalancing</span>
+          <div class="card-title">Constant Adjustment</div>
+          <p class="card-desc">As market conditions shift, capital is moved to maintain optimal positioning.</p>
+        </div>
+        <div class="concept-card">
+          <span class="card-icon">Automation</span>
+          <div class="card-title">Always On</div>
+          <p class="card-desc">Automated compounding means yield is reinvested continuously — no manual action needed.</p>
+        </div>
+      </div>
+
+      <p>This is managed DeFi at its core. You benefit from sophisticated onchain capital deployment without needing to understand every strategy, monitor every position, or manually reinvest every yield payment.</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">06 — Putting it together</p>
+      <h2>How It All Connects</h2>
+      <p>Now let's zoom out and see the full picture. You deposit assets. The vault pools your capital with others'. That pooled capital is deployed across strategies by active management logic — automatically compounding, rebalancing, and capturing opportunities across the market.</p>
+      <p>Your vault shares represent your proportional ownership of that growing pool. The eRate tracks how each share's value increases over time. And NAV — the total pool value — is the ultimate measure of the vault's health and performance.</p>
+      <p>The longer you participate, the more cycles of compounding work in your favor. Rebalancing captures better entries. Automated compounding eliminates drag. And the managed layer means every dollar in the vault is always working toward the best available outcome — not just sitting.</p>
+
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Concept</th>
+            <th>What it means</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Vault</td>
+            <td>A pooled capital system that actively deploys your assets across DeFi strategies.</td>
+          </tr>
+          <tr>
+            <td>Shares</td>
+            <td>Your proportional ownership of the vault — what you receive when you deposit.</td>
+          </tr>
+          <tr>
+            <td>eRate</td>
+            <td>The current value of one share. Rises as the vault earns yield. Tracks your growth.</td>
+          </tr>
+          <tr>
+            <td>NAV</td>
+            <td>Total value of everything in the vault. As NAV grows, so does the eRate.</td>
+          </tr>
+          <tr>
+            <td>Time</td>
+            <td>The primary driver of compounding. More time = more cycles = more growth.</td>
+          </tr>
+          <tr>
+            <td>Management</td>
+            <td>The active layer that deploys, rebalances, and optimizes capital on your behalf.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cta-section">
+      <h3>Ready to put your capital to work?</h3>
+      <p>Explore Concrete vaults and see eRate, NAV, and share mechanics live in action.</p>
+      <a class="cta-btn" href="https://app.concrete.xyz" target="_blank">Explore at app.concrete.xyz</a>
+    </div>
+
+  </div>
+</div>
